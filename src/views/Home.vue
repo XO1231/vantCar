@@ -1,18 +1,23 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ul>
+            <router-link :to="`/goods/${item.id}`" tag="li" v-for="item in state" :key="item.id">
+                <img :src="item.img" alt="">
+                <p>{{ item.title }} </p>
+            </router-link>
+        </ul>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
+import { mapState } from "vuex";
 export default {
   name: 'home',
-  components: {
-    HelloWorld
-  }
+  computed: {
+        ...mapState({
+            state: state => state.list
+        })
+    }
 }
 </script>
